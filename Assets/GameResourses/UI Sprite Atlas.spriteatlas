@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI Sprite Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 1024
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 8cd4a4ead4fac374e92880c284d508d7, type: 3}
+    - {fileID: 2800000, guid: 8e22961383718374c8c625afb83a2767, type: 3}
+    - {fileID: 2800000, guid: 9b91534bf16a3b04ebc38277cf5b4775, type: 3}
+    - {fileID: 2800000, guid: c7706efd5963a9141aa6a85d8ee54440, type: 3}
+    - {fileID: 2800000, guid: 45f93126ac8f89445a44a393b7fd23fd, type: 3}
+    - {fileID: 2800000, guid: 5b3cdfd47ecab4b44a530311b37bb840, type: 3}
+    - {fileID: 2800000, guid: fa375bead7007434a82548957d819a4c, type: 3}
+    - {fileID: 2800000, guid: 9b91534bf16a3b04ebc38277cf5b4775, type: 3}
+    - {fileID: 2800000, guid: 91a054d4ce57446419930f223fc0df21, type: 3}
+    - {fileID: 2800000, guid: e4c721fffa6a919448c799214b4dc697, type: 3}
+    - {fileID: 2800000, guid: 9cf3b1661f6a6ec4ba1ae275cbe27edd, type: 3}
+    - {fileID: 2800000, guid: 8cd4a4ead4fac374e92880c284d508d7, type: 3}
+    - {fileID: 2800000, guid: 90a74691820653a418b8221737237ca7, type: 3}
+    - {fileID: 2800000, guid: 30a22a916ad136f46aba307396ed1d92, type: 3}
+    totalSpriteSurfaceArea: 1583424
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 90a74691820653a418b8221737237ca7, type: 3}
+  - {fileID: 21300000, guid: 30a22a916ad136f46aba307396ed1d92, type: 3}
+  - {fileID: 21300000, guid: 8e22961383718374c8c625afb83a2767, type: 3}
+  - {fileID: 21300000, guid: 91a054d4ce57446419930f223fc0df21, type: 3}
+  - {fileID: 21300000, guid: 5b3cdfd47ecab4b44a530311b37bb840, type: 3}
+  - {fileID: 21300000, guid: 45f93126ac8f89445a44a393b7fd23fd, type: 3}
+  - {fileID: 21300000, guid: 9cf3b1661f6a6ec4ba1ae275cbe27edd, type: 3}
+  - {fileID: 21300000, guid: 8cd4a4ead4fac374e92880c284d508d7, type: 3}
+  - {fileID: 21300000, guid: fa375bead7007434a82548957d819a4c, type: 3}
+  - {fileID: 21300000, guid: 9b91534bf16a3b04ebc38277cf5b4775, type: 3}
+  - {fileID: 21300000, guid: c7706efd5963a9141aa6a85d8ee54440, type: 3}
+  - {fileID: 21300000, guid: e4c721fffa6a919448c799214b4dc697, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - home_screen_illustration
+  - button_music_off_disabled
+  - button_back
+  - button_play_pressed
+  - button_music_on_selected
+  - button_music_off_selected
+  - button_settings_pressed
+  - logo
+  - button_music_on_disabled
+  - button_play
+  - button_back_pressed
+  - button_settings
+  m_Tag: UI Sprite Atlas
+  m_IsVariant: 0
