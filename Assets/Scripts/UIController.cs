@@ -9,6 +9,9 @@ namespace NickMorhun.ColorBump
 	public sealed class UIController : MonoBehaviour
 	{
 		[SerializeField, CanBeNull]
+		private Game _game;
+
+		[SerializeField, CanBeNull]
 		private Player _player;
 
 		[SerializeField, CanBeNull]
@@ -17,13 +20,16 @@ namespace NickMorhun.ColorBump
 		[SerializeField, CanBeNull]
 		private GameObject _startHintUI;
 
-		[SerializeField, CanBeNull]
 		private GameObject _currentUI;
 
 		private void Start()
 		{
+			Assert.IsNotNull(_game);
 			Assert.IsNotNull(_player);
+			Assert.IsNotNull(_lobbyUI);
+			Assert.IsNotNull(_startHintUI);
 
+			SetUiScreen(_lobbyUI);
 			_player.PlayerStateChanged += OnPlayerStateChanged;
 		}
 
@@ -39,33 +45,41 @@ namespace NickMorhun.ColorBump
 
 		public void OnPlay()
 		{
-			if (_player == null)
+			if (_game == null)
 			{
 				return;
 			}
 
-			_player.PlayerState = PlayerState.AtStartLine;
+			_game.PlayNextLevel();
 		}
 
-		private void OnPlayerStateChanged(Player player, PlayerState playerState)
+		private void SetUiScreen([CanBeNull] GameObject ui)
 		{
 			if (_currentUI != null)
 			{
 				_currentUI.SetActive(false);
-				_currentUI = null;
 			}
 
+			_currentUI = ui;
+
+			if (_currentUI != null)
+			{
+				_currentUI.SetActive(true);
+			}
+		}
+
+		private void OnPlayerStateChanged(Player player, PlayerState playerState)
+		{
 			switch (playerState)
 			{
 				case PlayerState.InLobby:
-					_lobbyUI.SetActive(true);
-					_currentUI = _lobbyUI;
+					SetUiScreen(_lobbyUI);
 					break;
 				case PlayerState.AtStartLine:
-					_startHintUI.SetActive(true);
-					_currentUI = _startHintUI;
+					SetUiScreen(_startHintUI);
 					break;
 				case PlayerState.PlayingLevel:
+					SetUiScreen(null);
 					break;
 				case PlayerState.Observing:
 					break;

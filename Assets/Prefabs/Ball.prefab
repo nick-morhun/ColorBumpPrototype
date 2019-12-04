@@ -124,3 +124,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _minAcceleration: 2
   _maxAcceleration: 8
+  _tags: {fileID: 11400000, guid: b7924946371236c4a93a7083a0b5110a, type: 2}
