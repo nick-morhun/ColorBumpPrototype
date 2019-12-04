@@ -1,12 +1,11 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using NickMorhun.ColorBump.Tools;
 
 namespace NickMorhun.ColorBump
 {
+	[DisallowMultipleComponent]
 	[RequireComponent(typeof(Rigidbody))]
-	public class Ball : DragInputListener
+	public sealed class Ball : MonoBehaviour
 	{
 		[SerializeField, Range(0f, 10f)]
 		private float _minAcceleration = 1f;
@@ -27,9 +26,8 @@ namespace NickMorhun.ColorBump
 			_rigidbody.AddForce(_horizontalForce, ForceMode.Acceleration);
 		}
 
-		public override void OnDrag(PointerEventData eventData)
+		public void Push(Vector3 input)
 		{
-			Vector3 input = eventData.delta.ConvertToVector3XZ();
 			float magnitude = Mathf.Clamp(input.magnitude, _minAcceleration, _maxAcceleration);
 			_horizontalForce = magnitude * input.normalized;
 		}

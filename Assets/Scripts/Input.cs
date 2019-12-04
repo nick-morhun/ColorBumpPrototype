@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace NickMorhun.ColorBump
 {
+	[DisallowMultipleComponent]
 	public class Input : MonoBehaviour, IDragHandler
 	{
 		[SerializeField]

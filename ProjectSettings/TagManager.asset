@@ -16,7 +16,7 @@ TagManager:
   - Bounds
   - Ball
   - Obstacles
-  - 
+  - CameraBounds
   - 
   - 
   - 
