@@ -3,6 +3,7 @@ using UnityEngine;
 using JetBrains.Annotations;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Assertions;
 
 namespace NickMorhun.ColorBump
 {
@@ -14,6 +15,11 @@ namespace NickMorhun.ColorBump
 
 		private IEnumerable<Obstacle> _obstacles;
 
+		private void Start()
+		{
+			Assert.IsNotNull(_ball);
+		}
+
 		public bool TryPrepare([NotNull] IEnumerable<Obstacle> obstacles)
 		{
 			if (_ball == null || !obstacles.Any())
@@ -24,7 +30,7 @@ namespace NickMorhun.ColorBump
 			_ball.Stop();
 			Transform ballTransform = _ball.transform;
 			ballTransform.localPosition = Vector3.zero;
-			_ball.transform.localRotation = Quaternion.identity;
+			ballTransform.localRotation = Quaternion.identity;
 			CleanUp();
 
 			_obstacles = obstacles;
