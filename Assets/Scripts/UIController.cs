@@ -20,6 +20,9 @@ namespace NickMorhun.ColorBump
 		[SerializeField, CanBeNull]
 		private GameObject _startHintUI;
 
+		[SerializeField, CanBeNull]
+		private GameObject _victoryUI;
+
 		private GameObject _currentUI;
 
 		private void Start()
@@ -82,6 +85,9 @@ namespace NickMorhun.ColorBump
 					SetUiScreen(null);
 					break;
 				case PlayerState.Observing:
+					break;
+				case PlayerState.ObservingWin:
+					SetUiScreen(_victoryUI);
 					break;
 				default:
 					break;
