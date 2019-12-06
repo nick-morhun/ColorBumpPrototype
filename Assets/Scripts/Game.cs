@@ -58,7 +58,7 @@ namespace NickMorhun.ColorBump
 
 		public void PlayNextLevel()
 		{
-			bool isPrepared = _obstaclesGenerator != null && _level.TryPrepare(_obstaclesGenerator.Generate());
+			bool isPrepared = _obstaclesGenerator != null && _level.TryPrepare(_obstaclesGenerator);
 
 			if (!isPrepared)
 			{

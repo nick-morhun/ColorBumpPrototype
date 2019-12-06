@@ -2,7 +2,6 @@
 using UnityEngine;
 using JetBrains.Annotations;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine.Assertions;
 
 namespace NickMorhun.ColorBump
@@ -13,6 +12,7 @@ namespace NickMorhun.ColorBump
 		[SerializeField, CanBeNull]
 		private Ball _ball;
 
+		[CanBeNull]
 		private IEnumerable<Obstacle> _obstacles;
 
 		private void Start()
@@ -20,9 +20,11 @@ namespace NickMorhun.ColorBump
 			Assert.IsNotNull(_ball);
 		}
 
-		public bool TryPrepare([NotNull] IEnumerable<Obstacle> obstacles)
+		public bool TryPrepare([NotNull] ILevelDataSource levelDataSource)
 		{
-			if (_ball == null || !obstacles.Any())
+			CleanUp();
+
+			if (_ball == null)
 			{
 				return false;
 			}
@@ -31,9 +33,8 @@ namespace NickMorhun.ColorBump
 			Transform ballTransform = _ball.transform;
 			ballTransform.localPosition = Vector3.zero;
 			ballTransform.localRotation = Quaternion.identity;
-			CleanUp();
 
-			_obstacles = obstacles;
+			_obstacles = levelDataSource.GetObstacles();
 
 			foreach (var item in _obstacles)
 			{

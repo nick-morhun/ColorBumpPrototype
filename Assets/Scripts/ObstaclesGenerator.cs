@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace NickMorhun.ColorBump
 {
 	[DisallowMultipleComponent]
-	public sealed class ObstaclesGenerator : MonoBehaviour
+	public sealed class ObstaclesGenerator : MonoBehaviour, ILevelDataSource
 	{
 		[SerializeField, CanBeNull]
 		private Obstacle[] _obstaclePrefabs;
@@ -25,7 +25,7 @@ namespace NickMorhun.ColorBump
 
 		private List<Vector3> _cachedSpawnPoints;
 
-		public IEnumerable<Obstacle> Generate()
+		public IEnumerable<Obstacle> GetObstacles()
 		{
 			if (_obstaclePrefabs == null || _obstaclePrefabs.Length == 0)
 			{
