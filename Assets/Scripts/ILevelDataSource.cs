@@ -1,5 +1,6 @@
 ﻿using JetBrains.Annotations;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace NickMorhun.ColorBump
 {
@@ -7,5 +8,7 @@ namespace NickMorhun.ColorBump
 	{
 		[NotNull]
 		IEnumerable<Obstacle> GetObstacles();
+
+		(Vector3 startCenter, Vector3 endCenter, bool isSuccess) TryGetObstaclesFieldCoordinates();
 	}
 }

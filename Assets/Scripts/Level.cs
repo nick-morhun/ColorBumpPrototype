@@ -12,12 +12,35 @@ namespace NickMorhun.ColorBump
 		[SerializeField, CanBeNull]
 		private Ball _ball;
 
+		[SerializeField, CanBeNull]
+		private FinishLine _finishLine;
+
 		[CanBeNull]
 		private IEnumerable<Obstacle> _obstacles;
+
+		public Vector3 Direction => this ? transform.forward : Vector3.zero;
+
+		public event Action<Level> FinishLineWasCrossed;
 
 		private void Start()
 		{
 			Assert.IsNotNull(_ball);
+			Assert.IsNotNull(_finishLine);
+
+			_finishLine.WasCrossed += OnFinishLineWasCrossed;
+		}
+
+		private void OnDestroy()
+		{
+			if (_finishLine is object)
+			{
+				_finishLine.WasCrossed -= OnFinishLineWasCrossed;
+			}
+		}
+
+		private void OnFinishLineWasCrossed(FinishLine finishLine)
+		{
+			FinishLineWasCrossed?.Invoke(this);
 		}
 
 		public bool TryPrepare([NotNull] ILevelDataSource levelDataSource)
@@ -33,6 +56,25 @@ namespace NickMorhun.ColorBump
 			Transform ballTransform = _ball.transform;
 			ballTransform.localPosition = Vector3.zero;
 			ballTransform.localRotation = Quaternion.identity;
+
+			if (_finishLine == null)
+			{
+				return false;
+			}
+
+			var (startCenter, endCenter, isSuccess) = levelDataSource.TryGetObstaclesFieldCoordinates();
+
+			if (!isSuccess)
+			{
+				return false;
+			}
+
+			bool isFinishPrepared = _finishLine.TryPrepare(startCenter, endCenter);
+
+			if (!isFinishPrepared)
+			{
+				return false;
+			}
 
 			_obstacles = levelDataSource.GetObstacles();
 

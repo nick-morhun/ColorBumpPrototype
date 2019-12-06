@@ -1,5 +1,4 @@
-﻿using JetBrains.Annotations;
-using NickMorhun.ColorBump.Configuration;
+﻿using NickMorhun.ColorBump.Configuration;
 using System;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -10,17 +9,10 @@ namespace NickMorhun.ColorBump
 	[RequireComponent(typeof(Rigidbody))]
 	public sealed class Ball : MonoBehaviour
 	{
-		[SerializeField, Range(0f, 10f)]
-		private float _minAcceleration = 1f;
-
-		[SerializeField, Range(0f, 10f)]
-		private float _maxAcceleration = 1f;
-
-		[SerializeField, CanBeNull]
+		[SerializeField]
 		private Tags _tags;
 
 		private Rigidbody _rigidbody;
-		private Vector3 _horizontalForce;
 
 		public event Action<Ball> HitHazard;
 
@@ -28,11 +20,7 @@ namespace NickMorhun.ColorBump
 		{
 			Assert.IsNotNull(_tags);
 			_rigidbody = GetComponent<Rigidbody>();
-		}
-
-		private void FixedUpdate()
-		{
-			_rigidbody.AddForce(_horizontalForce, ForceMode.Acceleration);
+			Assert.IsNotNull(_rigidbody);
 		}
 
 		private void OnCollisionEnter(Collision collision)
@@ -43,16 +31,15 @@ namespace NickMorhun.ColorBump
 			}
 		}
 
-		public void Push(Vector3 input)
+		public void Push(Vector3 impulse)
 		{
-			float magnitude = Mathf.Clamp(input.magnitude, _minAcceleration, _maxAcceleration);
-			_horizontalForce = magnitude * input.normalized;
+			_rigidbody.AddForce(impulse, ForceMode.Impulse);
 		}
 
 		public void Stop()
 		{
-			_horizontalForce = Vector3.zero;
 			_rigidbody.velocity = Vector3.zero;
+			_rigidbody.angularVelocity = Vector3.zero;
 			_rigidbody.rotation = Quaternion.identity;
 		}
 	}

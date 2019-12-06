@@ -25,6 +25,24 @@ namespace NickMorhun.ColorBump
 
 		private List<Vector3> _cachedSpawnPoints;
 
+		public (Vector3 startCenter, Vector3 endCenter, bool isSuccess) TryGetObstaclesFieldCoordinates()
+		{
+			if (_leftBound == null || _rightBound == null)
+			{
+				return (Vector3.zero, Vector3.zero, false);
+			}
+
+			var spawnRowWidthVector = _rightBound.position - _leftBound.position;
+			var spawnRowLengthVector = Vector3.Cross(spawnRowWidthVector, Vector3.up);
+			float spawnCellWidth = spawnRowWidthVector.magnitude / (_spawnPointsPerRow - 1);
+			var spawnCellLengthVector = spawnRowLengthVector.normalized * spawnCellWidth;
+			var fieldLengthVector = _spawnPointRows * spawnCellLengthVector;
+
+			var fieldStart = .5f * (_leftBound.position + _rightBound.position);
+			var fieldFinish = fieldStart + fieldLengthVector;
+			return (fieldStart, fieldFinish, true);
+		}
+
 		public IEnumerable<Obstacle> GetObstacles()
 		{
 			if (_obstaclePrefabs == null || _obstaclePrefabs.Length == 0)
