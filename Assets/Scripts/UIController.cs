@@ -23,6 +23,9 @@ namespace NickMorhun.ColorBump
 		[SerializeField, CanBeNull]
 		private GameObject _victoryUI;
 
+		[SerializeField, CanBeNull]
+		private GameObject _settingsUI;
+
 		private GameObject _currentUI;
 
 		private void Start()
@@ -46,6 +49,7 @@ namespace NickMorhun.ColorBump
 			_player.PlayerStateChanged -= OnPlayerStateChanged;
 		}
 
+		[UsedImplicitly]
 		public void OnPlay()
 		{
 			if (_game == null)
@@ -54,6 +58,24 @@ namespace NickMorhun.ColorBump
 			}
 
 			_game.PlayNextLevel();
+		}
+
+		[UsedImplicitly]
+		public void OnSettings()
+		{
+			if (_settingsUI != null)
+			{
+				SetUiScreen(_settingsUI);
+			}
+		}
+
+		[UsedImplicitly]
+		public void OnSettingsBack()
+		{
+			if (_lobbyUI != null)
+			{
+				SetUiScreen(_lobbyUI);
+			}
 		}
 
 		private void SetUiScreen([CanBeNull] GameObject ui)
