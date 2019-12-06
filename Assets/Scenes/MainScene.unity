@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ball: {fileID: 8456635572700377867}
-  _inputScale: 0.4
+  _inputScale: 0.3
 --- !u!114 &51870421
 MonoBehaviour:
   m_ObjectHideFlags: 0
