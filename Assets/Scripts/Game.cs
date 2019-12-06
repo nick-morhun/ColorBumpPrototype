@@ -145,24 +145,33 @@ namespace NickMorhun.ColorBump
 
 		private void OnPlayerInputReceived(Player player)
 		{
-			player.PlayerState = PlayerState.PlayingLevel;
+			if (player.PlayerState == PlayerState.AtStartLine)
+			{
+				player.PlayerState = PlayerState.PlayingLevel;
+			}
 		}
 
 		private void OnPlayerPointerUpReceived(Player player)
 		{
-			_ballMover.enabled = true;
+			if (_player && _player.PlayerState == PlayerState.PlayingLevel)
+			{
+				_ballMover.enabled = true;
+			}
 		}
 
 		private void OnPlayerPointerDownReceived(Player player)
 		{
-			_ballMover.enabled = false;
+			if (_player && _player.PlayerState == PlayerState.PlayingLevel)
+			{
+				_ballMover.enabled = false;
+			}
 		}
 
 		private void OnFinishLineWasCrossed(Level level)
 		{
 			Debug.Log("The ball crossed the finish line.");
 
-			if (_player)
+			if (_player && _player.PlayerState == PlayerState.PlayingLevel)
 			{
 				_player.PlayerState = PlayerState.ObservingWin;
 			}
