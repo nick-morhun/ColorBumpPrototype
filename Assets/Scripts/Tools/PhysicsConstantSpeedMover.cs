@@ -24,7 +24,8 @@ namespace NickMorhun.ColorBump.Tools
 
 		private void FixedUpdate()
 		{
-			_rigidbody.velocity = Speed * Direction;
+			Vector3 velocityInDirection = Vector3.Project(_rigidbody.velocity, Direction);
+			_rigidbody.velocity += Speed * velocityInDirection.normalized - velocityInDirection;
 		}
 	}
 }
