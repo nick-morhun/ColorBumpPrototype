@@ -601,11 +601,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418797d0e4d8d6544a295e97a2f4f47d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _obstacleTypesCount: 2
   _leftBound: {fileID: 4834505781846772985}
   _rightBound: {fileID: 1454554886058048344}
   _spawnPointsPerRow: 5
-  _spawnPointRows: 2
+  _spawnPointRows: 4
+  _obstacleTypesCount: 2
+  _passageWidth: 2
 --- !u!1 &9005406197825863828
 GameObject:
   m_ObjectHideFlags: 0

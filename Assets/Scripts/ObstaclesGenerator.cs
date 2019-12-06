@@ -8,8 +8,7 @@ namespace NickMorhun.ColorBump
 	[DisallowMultipleComponent]
 	public sealed class ObstaclesGenerator : MonoBehaviour, ILevelDataSource
 	{
-		[SerializeField, Range(1, 50)]
-		private int _obstacleTypesCount = 1;
+		private const int MinPassageWidth = 2;
 
 		[SerializeField, CanBeNull]
 		private Transform _leftBound;
@@ -22,6 +21,13 @@ namespace NickMorhun.ColorBump
 
 		[SerializeField, Range(2, 50)]
 		private int _spawnPointRows = 2;
+
+
+		[SerializeField, Range(1, 50)]
+		private int _obstacleTypesCount = 1;
+
+		[SerializeField, Range(MinPassageWidth, 50)]
+		private int _passageWidth = MinPassageWidth;
 
 		private List<Vector3> _cachedSpawnPoints;
 
@@ -52,13 +58,25 @@ namespace NickMorhun.ColorBump
 
 			_cachedSpawnPoints = _cachedSpawnPoints ?? GetAllSpawnPoints();
 			var obstacles = new List<ObstacleData>();
+			_passageWidth = Mathf.Clamp(_passageWidth, MinPassageWidth, _spawnPointsPerRow);
+			int startIndexUpperBound = _spawnPointsPerRow - _passageWidth;
+			int passageStartIndex = UnityEngine.Random.Range(0, startIndexUpperBound);
 
-			foreach (var point in _cachedSpawnPoints)
+			for (int i = 0; i < _spawnPointRows; i++)
 			{
-				int type = UnityEngine.Random.Range(0, _obstacleTypesCount);
-				bool isHazard = UnityEngine.Random.Range(0, 2) == 1;
-				var obstacleData = new ObstacleData(isHazard, point, type);
-				obstacles.Add(obstacleData);
+				passageStartIndex = Mathf.Clamp(passageStartIndex, 0, startIndexUpperBound);
+
+				for (int j = 0; j < _spawnPointsPerRow; j++)
+				{
+					var point = _cachedSpawnPoints[i * _spawnPointsPerRow + j];
+					int type = UnityEngine.Random.Range(0, _obstacleTypesCount);
+					bool isHazard = j < passageStartIndex || j >= passageStartIndex + _passageWidth;
+					var obstacleData = new ObstacleData(isHazard, point, type);
+					obstacles.Add(obstacleData);
+				}
+
+				int halfPassageWidth = _passageWidth / 2;
+				passageStartIndex += UnityEngine.Random.Range(-halfPassageWidth, halfPassageWidth + 1);
 			}
 
 			return obstacles;
