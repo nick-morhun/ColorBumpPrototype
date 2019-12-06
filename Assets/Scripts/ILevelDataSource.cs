@@ -7,7 +7,7 @@ namespace NickMorhun.ColorBump
 	public interface ILevelDataSource
 	{
 		[NotNull]
-		IEnumerable<Obstacle> GetObstacles();
+		IEnumerable<ObstacleData> GetObstacles();
 
 		(Vector3 startCenter, Vector3 endCenter, bool isSuccess) TryGetObstaclesFieldCoordinates();
 	}

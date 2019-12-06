@@ -8,8 +8,8 @@ namespace NickMorhun.ColorBump
 	[DisallowMultipleComponent]
 	public sealed class ObstaclesGenerator : MonoBehaviour, ILevelDataSource
 	{
-		[SerializeField, CanBeNull]
-		private Obstacle[] _obstaclePrefabs;
+		[SerializeField, Range(1, 50)]
+		private int _obstacleTypesCount = 1;
 
 		[SerializeField, CanBeNull]
 		private Transform _leftBound;
@@ -43,34 +43,22 @@ namespace NickMorhun.ColorBump
 			return (fieldStart, fieldFinish, true);
 		}
 
-		public IEnumerable<Obstacle> GetObstacles()
+		public IEnumerable<ObstacleData> GetObstacles()
 		{
-			if (_obstaclePrefabs == null || _obstaclePrefabs.Length == 0)
+			if (_obstacleTypesCount == 0)
 			{
-				return Array.Empty<Obstacle>();
+				return Array.Empty<ObstacleData>();
 			}
 
 			_cachedSpawnPoints = _cachedSpawnPoints ?? GetAllSpawnPoints();
-			var obstacles = new List<Obstacle>();
+			var obstacles = new List<ObstacleData>();
 
 			foreach (var point in _cachedSpawnPoints)
 			{
-				int prefabIndex = UnityEngine.Random.Range(0, _obstaclePrefabs.Length);
-				var prefab = _obstaclePrefabs[prefabIndex];
-				var obstacle = Instantiate(prefab);
-				obstacle.transform.position = point;
+				int type = UnityEngine.Random.Range(0, _obstacleTypesCount);
 				bool isHazard = UnityEngine.Random.Range(0, 2) == 1;
-				bool isInited = isHazard
-					? obstacle.TryMakeHazard()
-					: obstacle.TryMakeNeutral();
-
-				if (!isInited)
-				{
-					Destroy(obstacle);
-					continue;
-				}
-
-				obstacles.Add(obstacle);
+				var obstacleData = new ObstacleData(isHazard, point, type);
+				obstacles.Add(obstacleData);
 			}
 
 			return obstacles;

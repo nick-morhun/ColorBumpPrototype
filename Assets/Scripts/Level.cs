@@ -43,7 +43,7 @@ namespace NickMorhun.ColorBump
 			FinishLineWasCrossed?.Invoke(this);
 		}
 
-		public bool TryPrepare([NotNull] ILevelDataSource levelDataSource)
+		public bool TryPrepare([NotNull] ILevelDataSource levelDataSource, [NotNull] ObstaclesFactory obstaclesFactory)
 		{
 			CleanUp();
 
@@ -76,13 +76,22 @@ namespace NickMorhun.ColorBump
 				return false;
 			}
 
-			_obstacles = levelDataSource.GetObstacles();
+			var obstaclesData = levelDataSource.GetObstacles();
+			var obstacles = new List<Obstacle>();
 
-			foreach (var item in _obstacles)
+			foreach (var obstacleData in obstaclesData)
 			{
-				item.transform.SetParent(transform);
+				Obstacle obstacle;
+				(obstacle, isSuccess) = obstaclesFactory.TryGetObstacle(obstacleData);
+
+				if (isSuccess)
+				{
+					obstacle.transform.SetParent(transform);
+					obstacles.Add(obstacle);
+				}
 			}
 
+			_obstacles = obstacles;
 			return true;
 		}
 

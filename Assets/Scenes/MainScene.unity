@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 51870421}
   - component: {fileID: 51870420}
   - component: {fileID: 51870423}
+  - component: {fileID: 51870424}
   m_Layer: 0
   m_Name: GameScripts
   m_TagString: Untagged
@@ -170,6 +171,7 @@ MonoBehaviour:
   _cameraMover: {fileID: 1041963817}
   _level: {fileID: 2054608030}
   _obstaclesGenerator: {fileID: 2054608031}
+  _obstaclesFactory: {fileID: 51870424}
   _player: {fileID: 51870420}
   _observerStateTimeScale: 0.3
   _autoSkipObserverState: 1
@@ -205,6 +207,21 @@ MonoBehaviour:
   _lobbyUI: {fileID: 1290114592}
   _startHintUI: {fileID: 1872323731}
   _victoryUI: {fileID: 1434816197563680530}
+--- !u!114 &51870424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51870419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b1869ee575b6b54aaad1ac7231d3735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _obstaclePrefabs:
+  - {fileID: 7792098337454103719, guid: 01733eb5882a56b449ea80299aa95a65, type: 3}
+  - {fileID: -5458648093712012034, guid: 4fea8f98bf627dd4a80bbe43061d0993, type: 3}
 --- !u!1 &70035368
 GameObject:
   m_ObjectHideFlags: 0

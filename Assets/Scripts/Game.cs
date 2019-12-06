@@ -26,6 +26,9 @@ namespace NickMorhun.ColorBump
 		private ObstaclesGenerator _obstaclesGenerator;
 
 		[SerializeField, CanBeNull]
+		private ObstaclesFactory _obstaclesFactory;
+
+		[SerializeField, CanBeNull]
 		private Player _player;
 
 		[SerializeField, Range(0f, 1f)]
@@ -44,6 +47,7 @@ namespace NickMorhun.ColorBump
 			Assert.IsNotNull(_cameraMover);
 			Assert.IsNotNull(_level);
 			Assert.IsNotNull(_obstaclesGenerator);
+			Assert.IsNotNull(_obstaclesFactory);
 			Assert.IsNotNull(_player);
 
 			_ball.HitHazard += OnHitHazard;
@@ -86,7 +90,8 @@ namespace NickMorhun.ColorBump
 		{
 			_ballMover.Direction = _level.Direction;
 			_cameraMover.Direction = _level.Direction;
-			bool isPrepared = _obstaclesGenerator != null && _level.TryPrepare(_obstaclesGenerator);
+			bool isPrepared = _obstaclesGenerator != null && _obstaclesFactory != null &&
+				_level.TryPrepare(_obstaclesGenerator, _obstaclesFactory);
 
 			if (isPrepared)
 			{

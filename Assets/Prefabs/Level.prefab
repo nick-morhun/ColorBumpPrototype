@@ -601,9 +601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418797d0e4d8d6544a295e97a2f4f47d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _obstaclePrefabs:
-  - {fileID: 7792098337454103719, guid: 01733eb5882a56b449ea80299aa95a65, type: 3}
-  - {fileID: -5458648093712012034, guid: 4fea8f98bf627dd4a80bbe43061d0993, type: 3}
+  _obstacleTypesCount: 2
   _leftBound: {fileID: 4834505781846772985}
   _rightBound: {fileID: 1454554886058048344}
   _spawnPointsPerRow: 5
