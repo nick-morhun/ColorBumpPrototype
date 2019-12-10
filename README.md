@@ -1,2 +1,2 @@
 # ColorBumpPrototype
-A simple action game where you bump into things ot test physics.
+A simple action game where you have to pass through obstacles with a ball to win.
